@@ -14,7 +14,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
-    private val _loginState = MutableStateFlow<ResponseResult<Unit>>(ResponseResult.Success(Unit))
+    private val _loginState = MutableStateFlow<ResponseResult<Unit>>(ResponseResult.Loading)
     val loginState : StateFlow<ResponseResult<Unit>> = _loginState
 
     fun login(email : String, password : String){
