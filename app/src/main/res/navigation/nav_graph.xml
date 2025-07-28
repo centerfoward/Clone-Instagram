@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment"
+        android:name="com.example.clone_instagram.presentation.login.LoginFragment"
+        android:label="Login" />
+    <action
+        android:id="@+id/action_login_to_register"
+        app:destination="@+id/registerFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.clone_instagram.presentation.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register" />
+    <action
+        android:id="@+id/action_register_to_login"
+        app:destination="@+id/loginFragment"/>
+</navigation>
