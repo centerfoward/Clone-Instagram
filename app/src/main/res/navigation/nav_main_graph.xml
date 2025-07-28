@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment"
+    android:id="@+id/nav_main_graph">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.clone_instagram.presentation.home.HomeFragment"
+        tool:layout="@layout/fragment_home"/>
+</navigation>

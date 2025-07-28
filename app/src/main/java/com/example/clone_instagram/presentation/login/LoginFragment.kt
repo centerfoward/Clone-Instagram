@@ -55,18 +55,27 @@ class LoginFragment : Fragment() {
             viewModel.loginState.collect { result ->
                 when(result){
                     is ResponseResult.Failure -> {
-                        Toast.makeText(context,"로그인에 실패했습니다",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"로그인에 실패했습니다 : ${result.exception.toString()}",Toast.LENGTH_SHORT).show()
                     }
                     ResponseResult.Loading -> {
                         //TODO
                     }
                     is ResponseResult.Success -> {
                         Toast.makeText(context,"로그인에 성공했습니다",Toast.LENGTH_SHORT).show()
-                        //TODO("성공하면 메인화면으로 넘어가는 로직 구현하기")
+                        navigateToMainGraph()
                     }
                 }
             }
         }
+    }
+
+    private fun navigateToMainGraph(){
+        val navController = findNavController()
+
+        val navInflater = navController.navInflater
+        val mainGraph = navInflater.inflate(R.navigation.nav_main_graph)
+
+        navController.graph = mainGraph
     }
 
     override fun onDestroy() {
