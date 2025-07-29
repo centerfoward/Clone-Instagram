@@ -2,6 +2,7 @@ package com.example.clone_instagram.data.source
 
 import com.example.clone_instagram.data.model.userData
 import com.example.clone_instagram.utils.ResponseResult
+import com.example.clone_instagram.utils.UidHashUtil
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
@@ -16,11 +17,11 @@ class FirebaseRemoteDataSource @Inject constructor(
         emit(ResponseResult.Loading)
 
         try{
-            //TODO UID 암호화 필요
+            val hashedUid = UidHashUtil.hash(uid) //uid hash 암호화
             data.collection("User_Info")
                 .add(userData(
                     name = name,
-                    uid = uid
+                    uid = hashedUid
                 )).await()
             emit(ResponseResult.Success(Unit))
 
@@ -32,8 +33,9 @@ class FirebaseRemoteDataSource @Inject constructor(
     fun getData(uid : String) : Flow<ResponseResult<DocumentSnapshot>> = flow{
         emit(ResponseResult.Loading)
         try{
+            val hashedUid = UidHashUtil.hash(uid)
             val querySnapShot = data.collection("User_Info")
-                .whereEqualTo("uid",uid)
+                .whereEqualTo("uid",hashedUid)
                 .get()
                 .await()
             if(!querySnapShot.isEmpty){
