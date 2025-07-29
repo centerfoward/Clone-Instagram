@@ -1,5 +1,6 @@
 package com.example.clone_instagram.presentation.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.clone_instagram.R
 
 import com.example.clone_instagram.databinding.FragmentLoginBinding
+import com.example.clone_instagram.presentation.HomeActivity
 import com.example.clone_instagram.utils.ResponseResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -62,20 +64,17 @@ class LoginFragment : Fragment() {
                     }
                     is ResponseResult.Success -> {
                         Toast.makeText(context,"로그인에 성공했습니다",Toast.LENGTH_SHORT).show()
-                        navigateToMainGraph()
+                        navigateToMainActivity()
                     }
                 }
             }
         }
     }
 
-    private fun navigateToMainGraph(){
-        val navController = findNavController()
-
-        val navInflater = navController.navInflater
-        val mainGraph = navInflater.inflate(R.navigation.nav_main_graph)
-
-        navController.graph = mainGraph
+    private fun navigateToMainActivity(){
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onDestroy() {
