@@ -13,6 +13,7 @@
     <action
         android:id="@+id/action_login_to_register"
         app:destination="@+id/registerFragment" />
+
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.clone_instagram.presentation.register.RegisterFragment"

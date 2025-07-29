@@ -107,11 +107,6 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
-    private fun showText(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

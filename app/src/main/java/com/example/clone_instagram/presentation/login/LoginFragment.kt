@@ -1,5 +1,6 @@
 package com.example.clone_instagram.presentation.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.clone_instagram.R
 
 import com.example.clone_instagram.databinding.FragmentLoginBinding
+import com.example.clone_instagram.presentation.HomeActivity
 import com.example.clone_instagram.utils.ResponseResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,26 +48,33 @@ class LoginFragment : Fragment() {
             viewModel.login(email,password)
         }
 
+        loginObserve()
+
+    }
+
+    private fun loginObserve(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loginState.collect { result ->
                 when(result){
                     is ResponseResult.Failure -> {
-                        Toast.makeText(context,"로그인에 실패했습니다",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"로그인에 실패했습니다 : ${result.exception.toString()}",Toast.LENGTH_SHORT).show()
                     }
                     ResponseResult.Loading -> {
-                        TODO()
+                        //TODO
                     }
-                    is ResponseResult.Success<*> -> {
+                    is ResponseResult.Success -> {
                         Toast.makeText(context,"로그인에 성공했습니다",Toast.LENGTH_SHORT).show()
-                        //TODO("성공하면 메인화면으로 넘어가는 로직 구현하기")
+                        navigateToMainActivity()
                     }
                 }
             }
         }
-//        binding.btnToRegister.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-//        }
+    }
 
+    private fun navigateToMainActivity(){
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onDestroy() {
