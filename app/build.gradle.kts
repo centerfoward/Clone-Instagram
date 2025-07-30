@@ -65,8 +65,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
-    // ✅ Firebase Auth
+    // ✅ Firebase
     implementation("com.google.firebase:firebase-auth:24.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
+    implementation("com.google.firebase:firebase-firestore")
 
 
     // ✅ Coroutines + Firebase await()
