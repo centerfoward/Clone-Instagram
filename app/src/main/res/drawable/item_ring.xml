@@ -1,0 +1,13 @@
+<!-- res/drawable/story_ring_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FF3E8E" /> <!-- 외곽 링 색상 -->
+        </shape>
+    </item>
+    <item android:inset="3dp">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" /> <!-- 내부 여백 배경 -->
+        </shape>
+    </item>
+</layer-list>
